@@ -181,5 +181,14 @@ class _AnimatedProgressIndicatorState extends State<AnimatedProgressIndicator>
       _curveAnimation = _controller.drive(CurveTween(curve: Curves.easeIn));
     }
 
-    
+    Widget build(BuildContext context) {
+      return AnimatedBuilder(
+        animation: _controller,
+        builder: (context, child) => LinearProgressIndicator(
+          value: _curveAnimation.value,
+          valueColor: _colorAnimation,
+          backgroundColor: _colorAnimation.value?.withOpacity(0.4),
+        ),
+      );
+    }
   }
