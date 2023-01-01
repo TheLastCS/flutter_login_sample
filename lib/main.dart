@@ -42,7 +42,7 @@ class WelcomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Text('Welcome!', style: Theme.of(context).textTheme.headline2),
+        child: Text('Welcome!', style: Theme.of(context).textTheme.displayMedium),
       ),
     );
   }
@@ -83,15 +83,30 @@ class _SignUpFormState extends State<SignUpForm> {
     Navigator.of(context).pushNamed('/welcome');
   }
 
+  void _showSnackBar() {
+    
+  }
+
+  final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Form(
+      key: _formKey,
       onChanged: _updateFormProgress,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
+          TextFormField(
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Null is Unacceptable!';
+              }
+              return null;
+            },
+          ),
           AnimatedProgressIndicator(value: _formProgress),
-          Text('Sign up', style: Theme.of(context).textTheme.headline4),
+          Text('Sign up', style: Theme.of(context).textTheme.headlineMedium),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: TextFormField(
